@@ -7,6 +7,7 @@ public class MovimientoJugador : MonoBehaviour
     private float velocity = 0.0f;
     [SerializeField] private float acceleration;
     private Animator anim;
+    [SerializeField] SphereCollider handCollider;
 
     private float moveSpeed;
     [SerializeField] private float walkSpeed;
@@ -20,6 +21,8 @@ public class MovimientoJugador : MonoBehaviour
     {
         playerController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+
+        handCollider.enabled = false;
     }
 
     void Update()
@@ -91,5 +94,15 @@ public class MovimientoJugador : MonoBehaviour
         {
             anim.SetTrigger("Attack");
         }
+    }
+
+    private void AttackBoolActive()
+    {
+        handCollider.enabled = true;
+    }
+
+    private void AttackBoolFalse()
+    {
+        handCollider.enabled = false;
     }
 }
