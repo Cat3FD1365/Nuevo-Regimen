@@ -10,9 +10,11 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] SphereCollider handCollider;
 
     private float moveSpeed;
+    private float rotationSpeed = 100;
     [SerializeField] private float walkSpeed;
     private Vector3 moveDirection;
     private Vector3 vectorGravity;
+    private Vector3 moveRotation;
     private CharacterController playerController;
 
     private bool CanMove = true;
@@ -28,6 +30,7 @@ public class MovimientoJugador : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        PlayerRotation();
         Gravity();
         PlayerAttack();
     }
@@ -61,6 +64,23 @@ public class MovimientoJugador : MonoBehaviour
         moveDirection *= walkSpeed;
 
         playerController.Move(moveDirection * Time.deltaTime);
+    }
+
+    private void PlayerRotation()
+    {
+        float rotateX = Input.GetAxis("Horizontal");
+
+        moveRotation = new Vector3(rotateX, 0, 0);
+        moveRotation.Normalize();
+
+        transform.Translate(moveRotation * moveSpeed * Time.deltaTime, Space.World);
+
+        if (moveRotation != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(moveRotation, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 
     private void Gravity()
