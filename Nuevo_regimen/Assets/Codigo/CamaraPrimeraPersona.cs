@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CamaraPrimeraPersona : MonoBehaviour
 {
-    float mouseSensitivity = 300f;
+    float mouseSensitivity = 0f;
+    float sensivilityTimer = 0.5f;
 
     [SerializeField] Transform playerBody;
 
@@ -17,6 +18,9 @@ public class CamaraPrimeraPersona : MonoBehaviour
 
     void Update()
     {
+        sensivilityTimer -= Time.deltaTime;
+        if (sensivilityTimer <= 0)
+            mouseSensitivity = 300f;
         MouseControl();
     }
 
