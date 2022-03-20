@@ -6,7 +6,7 @@ public class EnemigoPatrullaje : MonoBehaviour
 {
     float movementSpeed = 5f;
     float waitTime;
-    float startWaitTime = 3f;
+    float startWaitTime = 1f;
 
     [SerializeField] Transform[] availableSpots;
     private int randomSpot;

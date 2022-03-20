@@ -5,44 +5,36 @@ using UnityEngine.AI;
 
 public class EnemigoNavMesh : MonoBehaviour
 {
-    float movementSpeed = 5f;
-    float waitTime;
-    float startWaitTime = 3f;
-
     [SerializeField] NavMeshAgent navEnemy;
-    [SerializeField] Transform[] target;
-
-    private int randomSpot;
+    [SerializeField] Transform[] patrolPoints;
+    int patrolIndex;
+    Vector3 targetDestination;
 
     void Start()
     {
-        waitTime = startWaitTime;
-        randomSpot = Random.Range(0, target.Length);
+        navEnemy = GetComponent<NavMeshAgent>();
+        PatrolDestination();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        FollowTarget();
+        if (Vector3.Distance(transform.position, targetDestination) < 1)
+        {
+            PatrolPointIteration();
+            PatrolDestination();
+        }
     }
 
-    private void FollowTarget()
+    private void PatrolDestination()
     {
-        float distance = Vector3.Distance(transform.position, target[randomSpot].position);
-        navEnemy.enabled = true;
-        navEnemy.SetDestination(target[randomSpot].position);
+        targetDestination = patrolPoints[patrolIndex].position;
+        navEnemy.SetDestination(targetDestination);
+    }
 
-        if (Vector3.Distance(transform.position, target[randomSpot].position) < 0.2f)
-        {
-            if (waitTime <= 0)
-            {
-                randomSpot = Random.Range(0, target.Length);
-                waitTime = startWaitTime;
-            }
-            else
-            {
-                waitTime -= Time.deltaTime;
-            }
-        }
+    private void PatrolPointIteration()
+    {
+        patrolIndex++;
+        if (patrolIndex == patrolPoints.Length)
+            patrolIndex = 0;
     }
 }
