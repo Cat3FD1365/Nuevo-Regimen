@@ -9,8 +9,8 @@ public class EnemigoVisionV2 : MonoBehaviour
     [SerializeField] [Range(1, 180)] float angle = 30;
     [SerializeField] float height = 1.0f;
     [SerializeField] Color meshColor = Color.red;
-    public int scanFrequency = 30;
-    public LayerMask layers;
+    [SerializeField] int scanFrequency = 30;
+    [SerializeField] LayerMask layers;
 
     Collider[] colliders = new Collider[50];
     Mesh mesh;
@@ -20,12 +20,23 @@ public class EnemigoVisionV2 : MonoBehaviour
 
     void Start()
     {
-
+        scanInterval = 1.0f / scanFrequency;
     }
 
     void Update()
     {
+        scanTimer -= Time.deltaTime;
+        if (scanTimer < 0)
+        {
+            scanTimer += scanInterval;
+            Scan();
+        }
+    }
 
+    private void Scan()
+    {
+        count = Physics.OverlapSphereNonAlloc(transform.position, distance, colliders, layers,
+             QueryTriggerInteraction.Collide);
     }
 
     Mesh CreateWedgeMesh()
@@ -114,6 +125,7 @@ public class EnemigoVisionV2 : MonoBehaviour
     private void OnValidate()
     {
         mesh = CreateWedgeMesh();
+        scanInterval = 1.0f / scanFrequency;
     }
 
     private void OnDrawGizmos()
@@ -122,6 +134,12 @@ public class EnemigoVisionV2 : MonoBehaviour
         {
             Gizmos.color = meshColor;
             Gizmos.DrawMesh(mesh, transform.position, transform.rotation);
+        }
+
+        Gizmos.DrawWireSphere(transform.position, distance);
+        for (int i = 0; i < count; i++)
+        {
+            Gizmos.DrawSphere(colliders[i].transform.position, 1.0f);
         }
     }
 }
