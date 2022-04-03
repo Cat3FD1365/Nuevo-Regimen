@@ -11,6 +11,8 @@ public class EnemigoVisionV2 : MonoBehaviour
     [SerializeField] Color meshColor = Color.red;
     [SerializeField] int scanFrequency = 30;
     [SerializeField] LayerMask layers;
+    [SerializeField] LayerMask occlusionLayers;
+    [SerializeField] List<GameObject> Objects = new List<GameObject>();
 
     Collider[] colliders = new Collider[50];
     Mesh mesh;
@@ -37,6 +39,40 @@ public class EnemigoVisionV2 : MonoBehaviour
     {
         count = Physics.OverlapSphereNonAlloc(transform.position, distance, colliders, layers,
              QueryTriggerInteraction.Collide);
+
+        Objects.Clear();
+        for (int i = 0; i < count; i++)
+        {
+            GameObject obj = colliders[i].gameObject;
+            if (IsInSight(obj))
+                Objects.Add(obj);
+        }
+    }
+
+    public bool IsInSight(GameObject obj)
+    {
+        Vector3 origin = transform.position;
+        Vector3 destination = obj.transform.position;
+        Vector3 direction = destination - origin;
+        if (direction.y < 0 || direction.y > height)
+        {
+            return false;
+        }
+
+        direction.y = 0;
+        float deltaAngle = Vector3.Angle(direction, transform.forward);
+        if (deltaAngle > angle)
+        {
+            return false;
+        }
+
+        origin.y += height / 2;
+        destination.y = origin.y;
+        if (Physics.Linecast(origin, destination, occlusionLayers))
+        {
+            return false;
+        }
+        return true;
     }
 
     Mesh CreateWedgeMesh()
@@ -139,7 +175,14 @@ public class EnemigoVisionV2 : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, distance);
         for (int i = 0; i < count; i++)
         {
+            Gizmos.color = Color.red;
             Gizmos.DrawSphere(colliders[i].transform.position, 1.0f);
+        }
+
+        foreach (var obj in Objects)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(obj.transform.position, 1.0f);
         }
     }
 }
