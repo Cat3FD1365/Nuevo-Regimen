@@ -8,6 +8,7 @@ public class EnemigoNavMesh : MonoBehaviour
 {
     [SerializeField] NavMeshAgent navEnemy;
     [SerializeField] Transform[] patrolPoints;
+    [SerializeField] Transform playerTarget;
     int patrolIndex;
     Vector3 targetDestination;
 
@@ -24,11 +25,7 @@ public class EnemigoNavMesh : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, targetDestination) < 1)
-        {
-            PatrolPointIteration();
-            PatrolDestination();
-        }
+        FollowPlayer();
         EnemyAnimaton();
     }
 
@@ -40,9 +37,13 @@ public class EnemigoNavMesh : MonoBehaviour
 
     private void PatrolPointIteration()
     {
-        patrolIndex++;
-        if (patrolIndex == patrolPoints.Length)
-            patrolIndex = 0;
+        if (Vector3.Distance(transform.position, targetDestination) <= 1)
+        {
+            patrolIndex++;
+            if (patrolIndex == patrolPoints.Length)
+                patrolIndex = 0;
+        }
+        
     }
 
     private void EnemyAnimaton()
@@ -64,6 +65,33 @@ public class EnemigoNavMesh : MonoBehaviour
         else if (velocity > 1.0f)
         {
             velocity = 1.0f;
+        }
+    }
+
+    public void FollowPlayer()
+    {
+        bool followPlayer = false;
+
+        EnemigoVisionV2 EV2 = gameObject.GetComponent<EnemigoVisionV2>();
+        GameObject obj = EV2.colliders[0].gameObject;
+        if (EV2.IsInSight(obj))
+        {
+            followPlayer = true;
+        } 
+        else
+        {
+            followPlayer = false;
+        } 
+
+        if (followPlayer == true)
+        {
+            navEnemy.enabled = true;
+            navEnemy.SetDestination(playerTarget.position);
+        }
+        else if (followPlayer != true)
+        {
+            PatrolPointIteration();
+            PatrolDestination();
         }
     }
 }

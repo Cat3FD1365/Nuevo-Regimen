@@ -20,7 +20,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
     {
         sensivilityTimer -= Time.deltaTime;
         if (sensivilityTimer <= 0)
-            mouseSensitivity = 300f;
+            mouseSensitivity = 1000f;
         MouseControl();
     }
 
@@ -30,7 +30,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
         float mouseMovement_y = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         rotation_x -= mouseMovement_y;
-        rotation_x = Mathf.Clamp(rotation_x, -90f, 90f);
+        rotation_x = Mathf.Clamp(rotation_x, -90f, 70f);
 
         transform.localRotation = Quaternion.Euler(rotation_x, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseMovement_x);
