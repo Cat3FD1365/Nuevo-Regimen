@@ -10,17 +10,22 @@ public class EnemigoNavMesh : MonoBehaviour
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] Transform playerTarget;
     int patrolIndex;
+    float patrolTimer = 2f;
     Vector3 targetDestination;
 
-    private Animator anim;
-    private float velocity = 0.0f;
+    Animator anim;
+    float velocity = 0.0f;
     [SerializeField] private float acceleration;
+
+    InterfaceJugador interfaceJugador;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         navEnemy = GetComponent<NavMeshAgent>();
         PatrolDestination();
+
+        interfaceJugador = FindObjectOfType<InterfaceJugador>();
     }
 
     void Update()
@@ -39,9 +44,14 @@ public class EnemigoNavMesh : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, targetDestination) <= 1)
         {
-            patrolIndex++;
-            if (patrolIndex == patrolPoints.Length)
-                patrolIndex = 0;
+            patrolTimer -= Time.deltaTime;
+            if (patrolTimer <= 0)
+            {
+                patrolIndex++;
+                if (patrolIndex == patrolPoints.Length)
+                    patrolIndex = 0;
+                patrolTimer = 2f;
+            }
         }
         
     }
@@ -70,25 +80,12 @@ public class EnemigoNavMesh : MonoBehaviour
 
     public void FollowPlayer()
     {
-        bool followPlayer = false;
-
-        EnemigoVisionV2 EV2 = gameObject.GetComponent<EnemigoVisionV2>();
-        GameObject obj = EV2.colliders[0].gameObject;
-        if (EV2.IsInSight(obj))
-        {
-            followPlayer = true;
-        } 
-        else
-        {
-            followPlayer = false;
-        } 
-
-        if (followPlayer == true)
+        if (interfaceJugador.BeCaugth() == true)
         {
             navEnemy.enabled = true;
             navEnemy.SetDestination(playerTarget.position);
         }
-        else if (followPlayer != true)
+        else if (interfaceJugador.BeCaugth() == false)
         {
             PatrolPointIteration();
             PatrolDestination();
