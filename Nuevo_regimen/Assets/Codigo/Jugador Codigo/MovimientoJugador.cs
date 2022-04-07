@@ -6,11 +6,11 @@ public class MovimientoJugador : MonoBehaviour
 {
     [SerializeField] CharacterController characterControler;
 
-    float movementSpeed = 12f;
+    [SerializeField] float movementSpeed = 12f;
     Vector3 moveDirection;
 
     private Animator anim;
-    private float velocity = 0.0f;
+    [SerializeField] private float velocity = 0.0f;
     [SerializeField] private float acceleration;
 
     void Start()
@@ -33,6 +33,15 @@ public class MovimientoJugador : MonoBehaviour
         moveDirection = transform.right * moveX + transform.forward * moveZ;
 
         characterControler.Move(moveDirection * movementSpeed * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = 20f;
+        }
+        else
+        {
+            movementSpeed = 12f;
+        }
     }
 
     private void Gravity()
@@ -47,23 +56,33 @@ public class MovimientoJugador : MonoBehaviour
 
     private void PlayerAnimaton()
     {
-        if (moveDirection == Vector3.zero && velocity > 0.0f)
+        if (moveDirection == Vector3.zero && velocity >= 0.0f || moveDirection != Vector3.zero && velocity > 0.5f 
+            && !Input.GetKey(KeyCode.LeftShift))
         {
             velocity -= Time.deltaTime * acceleration;
             anim.SetFloat("Speed", velocity);
+            if (velocity <= 0.0f)
+            {
+                velocity = 0.0f;
+            }
         }
-        else if (moveDirection != Vector3.zero && velocity < 1.0f)
+        else if (moveDirection != Vector3.zero && velocity <= 0.5f && !Input.GetKey(KeyCode.LeftShift))
         {
             velocity += Time.deltaTime * acceleration;
             anim.SetFloat("Speed", velocity);
+            if (velocity >= 0.5f)
+            {
+                velocity = 0.5f;
+            }
         }
-        else if (velocity < 0.0f)
+        else if (moveDirection != Vector3.zero && velocity <= 1.0f && Input.GetKey(KeyCode.LeftShift))
         {
-            velocity = 0.0f;
-        }
-        else if (velocity > 1.0f)
-        {
-            velocity = 1.0f;
+            velocity += Time.deltaTime * acceleration;
+            anim.SetFloat("Speed", velocity);
+            if (velocity >= 1.0f)
+            {
+                velocity = 1.0f;
+            }
         }
     }
 }
