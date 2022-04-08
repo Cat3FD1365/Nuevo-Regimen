@@ -10,8 +10,8 @@ public class MovimientoJugador : MonoBehaviour
     Vector3 moveDirection;
 
     private Animator anim;
-    [SerializeField] private float velocity = 0.0f;
-    [SerializeField] private float acceleration;
+    [SerializeField] float velocity = 0.0f;
+    [SerializeField] float acceleration;
 
     void Start()
     {
@@ -34,9 +34,17 @@ public class MovimientoJugador : MonoBehaviour
 
         characterControler.Move(moveDirection * movementSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
         {
-            movementSpeed = 20f;
+            movementSpeed = 24;
+        }
+        else if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = 6;
+        }
+        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = 10;
         }
         else
         {
@@ -56,8 +64,8 @@ public class MovimientoJugador : MonoBehaviour
 
     private void PlayerAnimaton()
     {
-        if (moveDirection == Vector3.zero && velocity >= 0.0f || moveDirection != Vector3.zero && velocity > 0.5f 
-            && !Input.GetKey(KeyCode.LeftShift))
+        if (moveDirection == Vector3.zero && velocity >= 0.0f && !Input.GetKey(KeyCode.LeftControl)
+            || moveDirection != Vector3.zero && velocity > 0.5f && !Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
         {
             velocity -= Time.deltaTime * acceleration;
             anim.SetFloat("Speed", velocity);
@@ -83,6 +91,15 @@ public class MovimientoJugador : MonoBehaviour
             {
                 velocity = 1.0f;
             }
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            anim.SetBool("Crouch", true);
+        }
+        else if (!Input.GetKey(KeyCode.LeftControl))
+        {
+            anim.SetBool("Crouch", false);
         }
     }
 }

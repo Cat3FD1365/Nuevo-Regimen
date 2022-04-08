@@ -24,6 +24,19 @@ public class InterfaceJugador : MonoBehaviour
 
     public bool BeCaugth()
     {
+        if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
+        {
+            maxSneakTimer = 6f;
+        }
+        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
+        {
+            maxSneakTimer = 6f;
+        }
+        else
+        {
+            maxSneakTimer = 3f;
+        }
+
         visionTimer.fillAmount = sneakTime / maxSneakTimer;
 
         GameObject obj = enemigoVisionV2.colliders[0].gameObject;

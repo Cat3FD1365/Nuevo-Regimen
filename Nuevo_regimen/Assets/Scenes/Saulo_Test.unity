@@ -1705,7 +1705,7 @@ MonoBehaviour:
     m_Bits: 1
   Objects: []
   colliders:
-  - {fileID: 21647120014435550}
+  - {fileID: 254610324546586500}
   - {fileID: 21647120014435550}
   - {fileID: 0}
   - {fileID: 0}
@@ -9695,8 +9695,8 @@ GameObject:
   - component: {fileID: 794664729551224418}
   - component: {fileID: 21647120014435550}
   - component: {fileID: 21647120014435545}
-  - component: {fileID: 9184573085918787014}
   - component: {fileID: 21647120014435546}
+  - component: {fileID: 9184573085918787014}
   m_Layer: 6
   m_Name: Jugador
   m_TagString: Player
@@ -9717,6 +9717,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControler: {fileID: 21647120014435550}
+  movementSpeed: 12
+  velocity: 0
   acceleration: 1
 --- !u!114 &21647120014435546
 MonoBehaviour:
@@ -9924,13 +9926,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21647120014435544}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 48.8, y: -0.00000047683716, z: 31.8}
+  m_LocalPosition: {x: 48.8, y: 0, z: 31.8}
   m_LocalScale: {x: 3.5444782, y: 3.5444782, z: 3.5444782}
   m_Children:
+  - {fileID: 8534263512143533151}
   - {fileID: 1096025170431133580}
   - {fileID: 3383588290872065357}
   - {fileID: 5140689172098506486}
-  - {fileID: 8534263512143533151}
   - {fileID: 2115796723}
   - {fileID: 2112869898}
   m_Father: {fileID: 0}
@@ -9994,7 +9996,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 794664729551224418}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1138430783120259777
 Transform:
@@ -10670,7 +10672,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 794664729551224418}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &3389493943784171402
 Transform:
@@ -11110,7 +11112,7 @@ Transform:
   - {fileID: 9066577618241022409}
   - {fileID: 4845763556490784101}
   m_Father: {fileID: 794664729551224418}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5172484911261338399
 GameObject:
@@ -12076,6 +12078,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 794664729551224418}
+  cameraPlayer: {fileID: 8534263512143533146}
+  crouchCamera: 0
 --- !u!4 &8534263512143533151
 Transform:
   m_ObjectHideFlags: 0
@@ -12084,11 +12088,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8534263512143533146}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.7040589, z: 0.185}
+  m_LocalPosition: {x: 0, y: 1.7040588, z: 0.1849997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 794664729551224418}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &8562176806057880586
 GameObject:
@@ -12242,13 +12246,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:RightArm'\n\tTransform
-    'mixamorig:LeftLeg'\n\tand more ...\n\tFrom animation clip 'Sneaking Forward'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
