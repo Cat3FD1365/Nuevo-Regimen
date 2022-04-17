@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InterfaceJugador : MonoBehaviour
 {
     [SerializeField] private Image visionTimer;
-    private float maxSneakTimer = 3f;
+    private float maxSneakTimer = 1.5f;
     [SerializeField] private float sneakTime;
 
     EnemigoVisionV2 enemigoVisionV2;

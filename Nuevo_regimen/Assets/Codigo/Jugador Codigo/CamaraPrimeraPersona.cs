@@ -43,6 +43,10 @@ public class CamaraPrimeraPersona : MonoBehaviour
 
     private void CameraPosition()
     {
+        float lerpSpeed = 3f * Time.deltaTime;
+        Vector3 initialPosition = new Vector3(0f, 1.705f, 0.185f);
+        Vector3 crouchPosition = new Vector3(0f, 1.231f, 0.351f);
+
         if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
             crouchCamera = true;
@@ -58,11 +62,11 @@ public class CamaraPrimeraPersona : MonoBehaviour
 
         if (crouchCamera == true)
         {
-            cameraPlayer.transform.localPosition = new Vector3(0f, 1.231f, 0.351f);
+            cameraPlayer.transform.localPosition = Vector3.Lerp(cameraPlayer.transform.localPosition, crouchPosition, lerpSpeed);
         }
         else if (crouchCamera == false)
         {
-           cameraPlayer.transform.localPosition = new Vector3(0f, 1.705f, 0.185f);
+            cameraPlayer.transform.localPosition = Vector3.Lerp(cameraPlayer.transform.localPosition, initialPosition, lerpSpeed);
         }
     }
 }

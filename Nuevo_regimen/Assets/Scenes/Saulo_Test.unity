@@ -1705,8 +1705,8 @@ MonoBehaviour:
     m_Bits: 1
   Objects: []
   colliders:
-  - {fileID: 254610324546586500}
   - {fileID: 21647120014435550}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
