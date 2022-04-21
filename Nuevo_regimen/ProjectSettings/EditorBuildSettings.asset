@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Laberinto_Stefy.unity
     guid: 38247eec03fbb7a49a65278571515c85
+  - enabled: 1
+    path: Assets/Scenes/pressEnter2.unity
+    guid: d6c7675ef491b9447857e62cc4317508
   m_configObjects: {}
