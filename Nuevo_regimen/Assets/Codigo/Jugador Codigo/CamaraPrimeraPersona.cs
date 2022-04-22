@@ -24,7 +24,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
         //Esto fue una solución porque la camara iniciaba viendo hacia otro lado con la sensibilidad
         sensivilityTimer -= Time.deltaTime;
         if (sensivilityTimer <= 0)
-            mouseSensitivity = 1000f;
+            mouseSensitivity = 1500f;
         MouseControl();
         CameraPosition();
     }
@@ -35,7 +35,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
         float mouseMovement_y = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         rotation_x -= mouseMovement_y;
-        rotation_x = Mathf.Clamp(rotation_x, -90f, 70f);
+        rotation_x = Mathf.Clamp(rotation_x, -35f, 80f);
 
         transform.localRotation = Quaternion.Euler(rotation_x, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseMovement_x);
@@ -44,7 +44,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
     private void CameraPosition()
     {
         float lerpSpeed = 3f * Time.deltaTime;
-        Vector3 initialPosition = new Vector3(0f, 1.705f, 0.185f);
+        Vector3 initialPosition = new Vector3(0f, 1.370f, 0.250f);
         Vector3 crouchPosition = new Vector3(0f, 1.231f, 0.351f);
 
         if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
