@@ -24,7 +24,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
         //Esto fue una solución porque la camara iniciaba viendo hacia otro lado con la sensibilidad
         sensivilityTimer -= Time.deltaTime;
         if (sensivilityTimer <= 0)
-            mouseSensitivity = 1500f;
+            mouseSensitivity = 0500f;
         MouseControl();
         CameraPosition();
     }

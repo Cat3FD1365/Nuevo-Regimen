@@ -1459,7 +1459,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5264046565513620447}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5000001
+  m_Radius: 1
   m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1498,7 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af20a70754c7af45816699c70c7aa57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 30
+  distance: 45
   angle: 65
   height: 7
   meshColor: {r: 1, g: 0.72703385, b: 0, a: 0.57254905}
@@ -1580,6 +1580,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   playerTarget: {fileID: 0}
+  patrolTimer: 2
   acceleration: 0.5
 --- !u!1 &5424113339304553764
 GameObject:

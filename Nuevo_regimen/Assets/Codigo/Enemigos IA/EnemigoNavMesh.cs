@@ -10,7 +10,7 @@ public class EnemigoNavMesh : MonoBehaviour
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] Transform playerTarget;
     int patrolIndex;
-    float patrolTimer = 2f;
+    [SerializeField] float patrolTimer = 2f;
     Vector3 targetDestination;
 
     Animator anim;
