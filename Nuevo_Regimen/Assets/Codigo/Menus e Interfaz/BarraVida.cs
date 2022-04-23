@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BarraVida : MonoBehaviour
 {
-    public int vidaMax;
+    public int vidaMax = 100;
     public float vidaActual;
     public Image rellenoVida;
-    public Image moriste;
-    public GameObject interfaz;
-    public GameObject Jugador;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +23,7 @@ public class BarraVida : MonoBehaviour
         RevisarVida();
 
         perdiste();
+        
     }
 
     public void perdiste()
@@ -31,9 +31,7 @@ public class BarraVida : MonoBehaviour
         //Si la vida llega a 0 se acaba el juego
         if (vidaActual <= 0)
         {
-            Jugador.SetActive(false);
-            interfaz.SetActive(false);
-            moriste.enabled = true;
+            SceneManager.LoadScene("gameOver");
         }
     }
 

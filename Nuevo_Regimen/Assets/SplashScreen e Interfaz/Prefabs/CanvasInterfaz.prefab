@@ -1004,7 +1004,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2274783567256695698}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 259986143051204711}
+        m_TargetAssemblyTypeName: CargaNiveles, Assembly-CSharp
+        m_MethodName: CargaDeNivel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: press enter
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2274783567289452379
 GameObject:
   m_ObjectHideFlags: 0
@@ -2687,6 +2699,7 @@ GameObject:
   - component: {fileID: 2274783568219168114}
   - component: {fileID: 2274783568219168113}
   - component: {fileID: 2274783568219168112}
+  - component: {fileID: 259986143051204711}
   m_Layer: 0
   m_Name: ScriptsInterfaz
   m_TagString: Untagged
@@ -2742,6 +2755,18 @@ MonoBehaviour:
   cantBrillo: 0
   panelBrillo: {fileID: 2274783567358617355}
   casillaPantalla: {fileID: 2274783568381106075}
+--- !u!114 &259986143051204711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274783568219168115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db9dd5dec625074bb7dd920baddc594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2274783568287127000
 GameObject:
   m_ObjectHideFlags: 0

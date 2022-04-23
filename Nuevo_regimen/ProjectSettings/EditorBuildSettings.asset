@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/press enter.unity
+    path: Assets/Escenas/press enter.unity
     guid: 1e179d22044166541995937e5e2d83c1
   - enabled: 1
-    path: Assets/Scenes/Laberinto_Stefy.unity
+    path: Assets/Escenas/Laberinto_Stefy.unity
     guid: 38247eec03fbb7a49a65278571515c85
   - enabled: 1
-    path: Assets/Scenes/pressEnter2.unity
+    path: Assets/Escenas/pressEnter2.unity
     guid: d6c7675ef491b9447857e62cc4317508
+  - enabled: 1
+    path: Assets/Escenas/gameOver.unity
+    guid: 957cc486a22be7a43a84996927f8961a
   m_configObjects: {}
