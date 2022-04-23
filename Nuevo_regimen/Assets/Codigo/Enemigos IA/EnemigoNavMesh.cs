@@ -80,7 +80,7 @@ public class EnemigoNavMesh : MonoBehaviour
 
     public void FollowPlayer()
     {
-        if (interfaceJugador.BeCaugth() == true)
+        /*if (interfaceJugador.BeCaugth() == true)
         {
             navEnemy.enabled = true;
             navEnemy.SetDestination(playerTarget.position);
@@ -89,6 +89,71 @@ public class EnemigoNavMesh : MonoBehaviour
         {
             PatrolPointIteration();
             PatrolDestination();
+        }*/
+
+        bool followPlayer = false;
+
+        EnemigoVisionV2 enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
+        GameObject obj = enemigoVisionV2.colliders[0].gameObject;
+        if (enemigoVisionV2.IsInSight(obj))
+        {
+            followPlayer = true;
         }
+        else
+        {
+            followPlayer = false;
+        }
+
+        if (followPlayer == true)
+        {
+            navEnemy.enabled = true;
+            navEnemy.SetDestination(playerTarget.position);
+        }
+        else if (followPlayer != true)
+        {
+            PatrolPointIteration();
+            PatrolDestination();
+        }
+
+        /*bool followPlayer = false;
+
+        EnemigoVisionV2 enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
+        GameObject obj = enemigoVisionV2.colliders[0].gameObject;
+
+        InterfaceJugador interfaceJugador = gameObject.GetComponent<InterfaceJugador>();
+        interfaceJugador.Timer();
+        if (enemigoVisionV2.IsInSight(obj))
+        {
+            interfaceJugador.sneakTime -= Time.deltaTime / 2;
+            if (interfaceJugador.sneakTime <= 0)
+            {
+                interfaceJugador.sneakTime = 0;
+                followPlayer = true;
+            }
+            else
+            {
+                followPlayer = false;
+            }
+        }
+        else
+        {
+            interfaceJugador.sneakTime += Time.deltaTime / 2;
+            if (interfaceJugador.sneakTime >= interfaceJugador.maxSneakTimer)
+            {
+                interfaceJugador.sneakTime = interfaceJugador.maxSneakTimer;
+            }
+            followPlayer = false;
+        }
+
+        if (followPlayer == true)
+        {
+            navEnemy.enabled = true;
+            navEnemy.SetDestination(playerTarget.position);
+        }
+        else if (followPlayer != true)
+        {
+            PatrolPointIteration();
+            PatrolDestination();
+        }*/
     }
 }

@@ -5,15 +5,12 @@ using UnityEngine.UI;
 
 public class InterfaceJugador : MonoBehaviour
 {
-    [SerializeField] private Image visionTimer;
-    private float maxSneakTimer = 1.5f;
-    [SerializeField] private float sneakTime;
-
-    EnemigoVisionV2 enemigoVisionV2;
+    [SerializeField] Image visionTimer;
+    public float maxSneakTimer = 1.5f;
+    public float sneakTime;
 
     void Start()
     {
-        enemigoVisionV2 = FindObjectOfType<EnemigoVisionV2>();
         sneakTime = maxSneakTimer;
     }
 
@@ -22,7 +19,7 @@ public class InterfaceJugador : MonoBehaviour
 
     }
 
-    public bool BeCaugth()
+    public void Timer()
     {
         if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
@@ -38,29 +35,5 @@ public class InterfaceJugador : MonoBehaviour
         }
 
         visionTimer.fillAmount = sneakTime / maxSneakTimer;
-
-        GameObject obj = enemigoVisionV2.colliders[0].gameObject;
-        if (enemigoVisionV2.IsInSight(obj))
-        {
-            sneakTime -= Time.deltaTime / 2;
-            if (sneakTime <= 0)
-            {
-                sneakTime = 0;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            sneakTime += Time.deltaTime / 2;
-            if (sneakTime >= maxSneakTimer)
-            {
-                sneakTime = maxSneakTimer;
-            }
-            return false;
-        }
     }
 }

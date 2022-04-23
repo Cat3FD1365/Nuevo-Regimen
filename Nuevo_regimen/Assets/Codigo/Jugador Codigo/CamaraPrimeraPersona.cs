@@ -45,7 +45,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
     {
         float lerpSpeed = 3f * Time.deltaTime;
         Vector3 initialPosition = new Vector3(0f, 1.370f, 0.250f);
-        Vector3 crouchPosition = new Vector3(0f, 1.231f, 0.351f);
+        Vector3 crouchPosition = new Vector3(0f, 1.100f, 0.420f);
 
         if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {

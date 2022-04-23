@@ -65,7 +65,9 @@ public class MovimientoJugador : MonoBehaviour
     private void PlayerAnimaton()
     {
         if (moveDirection == Vector3.zero && velocity >= 0.0f && !Input.GetKey(KeyCode.LeftControl)
-            || moveDirection != Vector3.zero && velocity > 0.5f && !Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
+            || moveDirection != Vector3.zero && velocity > 0.5f && !Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl)
+            || moveDirection != Vector3.zero && velocity > 0.5f && !Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftControl)
+            || moveDirection == Vector3.zero && velocity >= 0.0f && Input.GetKey(KeyCode.LeftControl))
         {
             velocity -= Time.deltaTime * acceleration;
             anim.SetFloat("Speed", velocity);
