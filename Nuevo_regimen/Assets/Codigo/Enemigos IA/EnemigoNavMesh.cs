@@ -19,6 +19,9 @@ public class EnemigoNavMesh : MonoBehaviour
 
     InterfaceJugador interfaceJugador;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip[] stepClips;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -26,6 +29,8 @@ public class EnemigoNavMesh : MonoBehaviour
         PatrolDestination();
 
         interfaceJugador = FindObjectOfType<InterfaceJugador>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -133,5 +138,16 @@ public class EnemigoNavMesh : MonoBehaviour
             PatrolPointIteration();
             PatrolDestination();
         }*/
+    }
+
+    private void Step_Sound()
+    {
+        AudioClip clip = StepClip();
+        audioSource.PlayOneShot(clip);
+    }
+
+    private AudioClip StepClip()
+    {
+        return stepClips[UnityEngine.Random.Range(0, stepClips.Length)];
     }
 }

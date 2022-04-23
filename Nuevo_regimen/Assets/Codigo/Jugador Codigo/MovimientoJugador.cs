@@ -40,18 +40,22 @@ public class MovimientoJugador : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
         {
             movementSpeed = 12;
+            audioSource.volume = 0.9f;
         }
         else if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
             movementSpeed = 3;
+            audioSource.volume = 0.4f;
         }
         else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
         {
             movementSpeed = 4.5f;
+            audioSource.volume = 0.5f;
         }
         else
         {
             movementSpeed = 6f;
+            audioSource.volume = 0.6f;
         }
     }
 

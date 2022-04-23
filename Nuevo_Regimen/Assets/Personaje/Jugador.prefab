@@ -3405,7 +3405,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2274783568219168112, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
       propertyPath: cantVolumen
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2274783568753017273, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
       propertyPath: m_Pivot.x
