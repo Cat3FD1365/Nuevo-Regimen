@@ -6,7 +6,7 @@ public class MovimientoJugador : MonoBehaviour
 {
     [SerializeField] CharacterController characterControler;
 
-    [SerializeField] float movementSpeed = 12f;
+    float movementSpeed = 6f;
     Vector3 moveDirection;
 
     private Animator anim;
@@ -36,19 +36,19 @@ public class MovimientoJugador : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
         {
-            movementSpeed = 24;
+            movementSpeed = 12;
         }
         else if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
-            movementSpeed = 6;
+            movementSpeed = 3;
         }
         else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
         {
-            movementSpeed = 10;
+            movementSpeed = 4.5f;
         }
         else
         {
-            movementSpeed = 12f;
+            movementSpeed = 6f;
         }
     }
 
