@@ -23,15 +23,15 @@ public class InterfaceJugador : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
-            maxSneakTimer = 6f;
+            maxSneakTimer = 3f;
         }
         else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
         {
-            maxSneakTimer = 6f;
+            maxSneakTimer = 3f;
         }
         else
         {
-            maxSneakTimer = 3f;
+            maxSneakTimer = 1.5f;
         }
 
         visionTimer.fillAmount = sneakTime / maxSneakTimer;
