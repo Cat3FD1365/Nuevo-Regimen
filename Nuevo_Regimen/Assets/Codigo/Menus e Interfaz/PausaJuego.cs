@@ -25,9 +25,18 @@ public class PausaJuego : MonoBehaviour
             HUD.SetActive(!pausado);
             menuOpciones.SetActive(false);
         }
-        if (pausado == true) Pause();
-        else Play();
-        
+        if (pausado == true)
+        {
+            Pause();
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Play();
+        }
+
+
     }
 
     public void Play()
