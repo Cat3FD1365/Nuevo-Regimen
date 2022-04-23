@@ -20,6 +20,7 @@ public class EnemigoNavMesh : MonoBehaviour
     [SerializeField] private float acceleration;
 
     InterfaceJugador interfaceJugador;
+    [SerializeField] float followPlayerTimer = 0;
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
@@ -135,18 +136,27 @@ public class EnemigoNavMesh : MonoBehaviour
             PatrolPointIteration();
             PatrolDestination();
         }*/
-
+        
         EnemigoVisionV2 enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
         GameObject obj = enemigoVisionV2.colliders[0].gameObject;
+
         if (enemigoVisionV2.IsInSight(obj))
         {
-            navEnemy.enabled = true;
-            navEnemy.SetDestination(playerTarget.position);
+            followPlayerTimer = 2;
+            if (followPlayerTimer > 0)
+            {
+                navEnemy.enabled = true;
+                navEnemy.SetDestination(playerTarget.position);
+            }
         }
         else
         {
-            PatrolPointIteration();
-            PatrolDestination();
+            if (followPlayerTimer <= 0)
+            {
+                PatrolPointIteration();
+                PatrolDestination();
+            }
+            followPlayerTimer -= Time.deltaTime;
         }
     }
 
