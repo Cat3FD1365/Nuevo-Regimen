@@ -20,7 +20,8 @@ public class BajarLaVida : MonoBehaviour
         
     }
 
-    public void OnTriggerEnter(Collider other)
+
+    public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player")) cantVida.vidaActual = cantVida.vidaActual - daño;
     }
