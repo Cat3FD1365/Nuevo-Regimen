@@ -11,16 +11,18 @@ public class InterfaceJugador : MonoBehaviour
 
     void Start()
     {
-        sneakTime = maxSneakTimer;
+
     }
 
     void Update()
     {
-
+        Timer();
     }
 
     public void Timer()
     {
+        EnemigoNavMesh enemigoNavMesh = gameObject.GetComponent<EnemigoNavMesh>();
+
         if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
             maxSneakTimer = 3f;
