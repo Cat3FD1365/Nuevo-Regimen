@@ -13,9 +13,12 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] float velocity = 0.0f;
     [SerializeField] float acceleration;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip[] stepClips;
     void Start()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -103,5 +106,16 @@ public class MovimientoJugador : MonoBehaviour
         {
             anim.SetBool("Crouch", false);
         }
+    }
+
+    private void Step_Sound()
+    {
+        AudioClip clip = StepClip();
+        audioSource.PlayOneShot(clip);
+    }
+
+    private AudioClip StepClip()
+    {
+        return stepClips[UnityEngine.Random.Range(0, stepClips.Length)];
     }
 }
