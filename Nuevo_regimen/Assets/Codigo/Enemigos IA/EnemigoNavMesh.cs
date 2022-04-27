@@ -12,15 +12,15 @@ public class EnemigoNavMesh : MonoBehaviour
     [SerializeField] Transform[] turnAround;
     int patrolIndex;
     [SerializeField] int turnAroundIndex;
-    float patrolTimer = 9f;
+    [SerializeField] float patrolTimer = 9f;
     Vector3 targetDestination;
 
     Animator anim;
     float velocity = 0.0f;
     [SerializeField] private float acceleration;
 
-    InterfaceJugador interfaceJugador;
-    [SerializeField] float followPlayerTimer = 0;
+    bool followPlayer = false;
+    MovimientoJugador movimientoJugador;
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
@@ -31,10 +31,9 @@ public class EnemigoNavMesh : MonoBehaviour
         navEnemy = GetComponent<NavMeshAgent>();
         PatrolDestination();
 
-        interfaceJugador = FindObjectOfType<InterfaceJugador>();
+        movimientoJugador = FindObjectOfType<MovimientoJugador>();
 
         audioSource = GetComponent<AudioSource>();
-
     }
 
     void Update()
@@ -64,21 +63,21 @@ public class EnemigoNavMesh : MonoBehaviour
             }
             if (patrolTimer <= 6 && patrolTimer >= 4)
             {
-                turnAroundIndex = 1;
+                turnAroundIndex = 3;
                 Vector3 direction = (turnAround[turnAroundIndex].position - transform.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7);
             }
             if (patrolTimer <= 4 && patrolTimer >= 2)
             {
-                turnAroundIndex = 2;
+                turnAroundIndex = 1;
                 Vector3 direction = (turnAround[turnAroundIndex].position - transform.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7);
             }
             if (patrolTimer <= 2 && patrolTimer >= 0)
             {
-                turnAroundIndex = 3;
+                turnAroundIndex = 2;
                 Vector3 direction = (turnAround[turnAroundIndex].position - transform.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7);
@@ -104,12 +103,14 @@ public class EnemigoNavMesh : MonoBehaviour
 
     private void EnemyAnimaton()
     {
-        if (Vector3.Distance(transform.position, targetDestination) < 10 && velocity > 0.0f)
+        if (Vector3.Distance(transform.position, targetDestination) < 10 && velocity > 0.0f 
+            || Vector3.Distance(transform.position, playerTarget.position) < 10 && velocity > 0.0f)
         {
             velocity -= Time.deltaTime * acceleration;
             anim.SetFloat("Speed", velocity);
         }
-        else if (Vector3.Distance(transform.position, targetDestination) >= 10 && velocity < 1.0f)
+        else if (Vector3.Distance(transform.position, targetDestination) >= 10 && velocity < 1.0f
+            || Vector3.Distance(transform.position, playerTarget.position) >= 10 && velocity < 1.0f)
         {
             velocity += Time.deltaTime * acceleration;
             anim.SetFloat("Speed", velocity);
@@ -126,37 +127,75 @@ public class EnemigoNavMesh : MonoBehaviour
 
     public void FollowPlayer()
     {
-        /*if (interfaceJugador.BeCaugth() == true)
-        {
-            navEnemy.enabled = true;
-            navEnemy.SetDestination(playerTarget.position);
-        }
-        else if (interfaceJugador.BeCaugth() == false)
-        {
-            PatrolPointIteration();
-            PatrolDestination();
-        }*/
-        
         EnemigoVisionV2 enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
         GameObject obj = enemigoVisionV2.colliders[0].gameObject;
 
         if (enemigoVisionV2.IsInSight(obj))
         {
-            followPlayerTimer = 2;
-            if (followPlayerTimer > 0)
+            followPlayer = true;
+            movimientoJugador.playerOnSight = true;
+            if (followPlayer == true)
             {
                 navEnemy.enabled = true;
                 navEnemy.SetDestination(playerTarget.position);
+                patrolTimer = 9f;
             }
         }
         else
         {
-            if (followPlayerTimer <= 0)
+            movimientoJugador.playerOnSight = false;
+            if (followPlayer == true)
+            {
+                FollowPlayerLastPosition();
+            }
+            else if (followPlayer == false)
             {
                 PatrolPointIteration();
                 PatrolDestination();
             }
-            followPlayerTimer -= Time.deltaTime;
+        }
+    }
+
+    private void FollowPlayerLastPosition()
+    {
+        targetDestination = movimientoJugador.playerStaticPosition;
+        navEnemy.SetDestination(targetDestination);
+        if (Vector3.Distance(transform.position, targetDestination) <= 1f)
+        {
+            patrolTimer -= Time.deltaTime;
+            if (patrolTimer <= 8 && patrolTimer >= 6)
+            {
+                turnAroundIndex = 0;
+                Vector3 direction = (turnAround[turnAroundIndex].position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7);
+            }
+            if (patrolTimer <= 6 && patrolTimer >= 4)
+            {
+                turnAroundIndex = 3;
+                Vector3 direction = (turnAround[turnAroundIndex].position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7);
+            }
+            if (patrolTimer <= 4 && patrolTimer >= 2)
+            {
+                turnAroundIndex = 1;
+                Vector3 direction = (turnAround[turnAroundIndex].position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7);
+            }
+            if (patrolTimer <= 2 && patrolTimer >= 0)
+            {
+                turnAroundIndex = 2;
+                Vector3 direction = (turnAround[turnAroundIndex].position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7);
+            }
+            if (patrolTimer <= 0)
+            {
+                patrolTimer = 9f;
+                followPlayer = false;
+            }
         }
     }
 

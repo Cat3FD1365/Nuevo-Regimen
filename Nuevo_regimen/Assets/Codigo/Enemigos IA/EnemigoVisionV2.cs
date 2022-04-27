@@ -15,7 +15,7 @@ public class EnemigoVisionV2 : MonoBehaviour
     [SerializeField] LayerMask occlusionLayers;
     [SerializeField] List<GameObject> Objects = new List<GameObject>();
 
-    public Collider[] colliders = new Collider[50];
+    public Collider[] colliders = new Collider[10];
     Mesh mesh;
     int count;
     float scanInterval;
