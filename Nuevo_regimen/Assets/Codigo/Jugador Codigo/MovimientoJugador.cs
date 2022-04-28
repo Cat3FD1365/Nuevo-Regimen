@@ -13,12 +13,6 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] float velocity = 0.0f;
     [SerializeField] float acceleration;
 
-    [SerializeField] Transform playerLastPosition;
-    [SerializeField] Transform playerActualPosition;
-    public bool playerOnSight;
-    public Vector3 playerStaticPosition = new Vector3(0, 0, 0);
-    float folloPlayerTimer = 1.0f;
-
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
     void Start()
@@ -32,28 +26,6 @@ public class MovimientoJugador : MonoBehaviour
         PlayerMovement();
         Gravity();
         PlayerAnimaton();
-        PlayerPositionReference();
-    }
-
-    private void PlayerPositionReference()
-    {
-        if (playerOnSight == true)
-        {
-            playerLastPosition.transform.position = new Vector3(playerActualPosition.position.x, 0, playerActualPosition.position.z);
-            playerStaticPosition = playerLastPosition.position;
-            folloPlayerTimer = 1.0f;
-        }
-        else if (playerOnSight == false)
-        {
-            folloPlayerTimer -= Time.deltaTime;
-            if (folloPlayerTimer > 0.0f)
-            {
-                playerLastPosition.transform.position = new Vector3(playerActualPosition.position.x, 0, playerActualPosition.position.z);
-                playerStaticPosition = playerLastPosition.position;
-            }
-            else if (folloPlayerTimer <= 0.0f)
-                playerLastPosition.position = playerStaticPosition;
-        }
     }
 
     private void PlayerMovement()

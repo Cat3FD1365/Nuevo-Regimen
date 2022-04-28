@@ -20,7 +20,9 @@ public class EnemigoNavMesh : MonoBehaviour
     [SerializeField] private float acceleration;
 
     bool followPlayer = false;
-    MovimientoJugador movimientoJugador;
+    bool playerOnSight;
+    Vector3 playerStaticPosition = new Vector3(0, 0, 0);
+    float folloPlayerTimer = 1.0f;
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
@@ -31,8 +33,6 @@ public class EnemigoNavMesh : MonoBehaviour
         navEnemy = GetComponent<NavMeshAgent>();
         PatrolDestination();
 
-        movimientoJugador = FindObjectOfType<MovimientoJugador>();
-
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -41,6 +41,7 @@ public class EnemigoNavMesh : MonoBehaviour
         FollowPlayer();
         LookAtReference();
         EnemyAnimaton();
+        PlayerPositionReference();
     }
 
     private void PatrolDestination()
@@ -133,7 +134,7 @@ public class EnemigoNavMesh : MonoBehaviour
         if (enemigoVisionV2.IsInSight(obj))
         {
             followPlayer = true;
-            movimientoJugador.playerOnSight = true;
+            playerOnSight = true;
             if (followPlayer == true)
             {
                 navEnemy.enabled = true;
@@ -143,7 +144,7 @@ public class EnemigoNavMesh : MonoBehaviour
         }
         else
         {
-            movimientoJugador.playerOnSight = false;
+            playerOnSight = false;
             if (followPlayer == true)
             {
                 FollowPlayerLastPosition();
@@ -156,9 +157,30 @@ public class EnemigoNavMesh : MonoBehaviour
         }
     }
 
+    private void PlayerPositionReference()
+    {
+        if (playerOnSight == true)
+        {
+            playerStaticPosition = new Vector3(playerTarget.position.x, 0, playerTarget.position.z);
+            folloPlayerTimer = 1.0f;
+        }
+        else if (playerOnSight == false)
+        {
+            folloPlayerTimer -= Time.deltaTime;
+            if (folloPlayerTimer > 0.0f)
+            {
+                playerStaticPosition = new Vector3(playerTarget.position.x, 0, playerTarget.position.z);
+            }
+            else if (folloPlayerTimer <= 0.0f)
+            {
+
+            }
+        }
+    }
+
     private void FollowPlayerLastPosition()
     {
-        targetDestination = movimientoJugador.playerStaticPosition;
+        targetDestination = playerStaticPosition;
         navEnemy.SetDestination(targetDestination);
         if (Vector3.Distance(transform.position, targetDestination) <= 1f)
         {
