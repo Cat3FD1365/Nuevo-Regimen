@@ -10,9 +10,10 @@ public class EnemigoNavMesh : MonoBehaviour
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] Transform playerTarget;
     [SerializeField] Transform[] turnAround;
+
     int patrolIndex;
-    [SerializeField] int turnAroundIndex;
-    [SerializeField] float patrolTimer = 9f;
+    int turnAroundIndex;
+    float patrolTimer = 9f;
     Vector3 targetDestination;
 
     Animator anim;
@@ -27,6 +28,9 @@ public class EnemigoNavMesh : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
 
+    MovimientoJugador movimientoJugador;
+    EnemigoVisionV2 enemigoVisionV2;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -34,6 +38,9 @@ public class EnemigoNavMesh : MonoBehaviour
         PatrolDestination();
 
         audioSource = GetComponent<AudioSource>();
+
+        movimientoJugador = FindObjectOfType<MovimientoJugador>();
+        enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
     }
 
     void Update()
@@ -42,6 +49,7 @@ public class EnemigoNavMesh : MonoBehaviour
         LookAtReference();
         EnemyAnimaton();
         PlayerPositionReference();
+        FollowRange();
     }
 
     private void PatrolDestination()
@@ -128,10 +136,11 @@ public class EnemigoNavMesh : MonoBehaviour
 
     public void FollowPlayer()
     {
-        EnemigoVisionV2 enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
+        //EnemigoVisionV2 enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
         GameObject obj = enemigoVisionV2.colliders[0].gameObject;
+        float followDistance = Vector3.Distance(playerTarget.position, transform.position);
 
-        if (enemigoVisionV2.IsInSight(obj))
+        if (enemigoVisionV2.IsInSight(obj) || movimientoJugador.movementSound == 3 && followDistance <= enemigoVisionV2.distance)
         {
             followPlayer = true;
             playerOnSight = true;
@@ -154,6 +163,26 @@ public class EnemigoNavMesh : MonoBehaviour
                 PatrolPointIteration();
                 PatrolDestination();
             }
+        }
+    }
+
+    private void FollowRange()
+    {
+        if (movimientoJugador.movementSound == 0)
+        {
+            enemigoVisionV2.distance = 45;
+        }
+        else if (movimientoJugador.movementSound == 1)
+        {
+            enemigoVisionV2.distance = 35;
+        }
+        else if (movimientoJugador.movementSound == 2)
+        {
+            enemigoVisionV2.distance = 40;
+        }
+        else if (movimientoJugador.movementSound == 3)
+        {
+            enemigoVisionV2.distance = 50;
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [ExecuteInEditMode]
 public class EnemigoVisionV2 : MonoBehaviour
 {
-    [SerializeField] float distance = 10;
+    public float distance = 45;
     [SerializeField] [Range(1, 180)] float angle = 30;
     [SerializeField] float height = 1.0f;
     [SerializeField] Color meshColor = Color.red;

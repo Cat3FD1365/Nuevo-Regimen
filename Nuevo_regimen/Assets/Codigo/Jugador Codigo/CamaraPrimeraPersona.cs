@@ -12,7 +12,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
     float rotation_x = 0f;
 
     [SerializeField] GameObject cameraPlayer;
-    public bool crouchCamera = false;
+    bool crouchCamera = false;
 
     void Start()
     {
@@ -45,7 +45,7 @@ public class CamaraPrimeraPersona : MonoBehaviour
     {
         float lerpSpeed = 3f * Time.deltaTime;
         Vector3 initialPosition = new Vector3(0f, 1.370f, 0.250f);
-        Vector3 crouchPosition = new Vector3(0f, 1.100f, 0.420f);
+        Vector3 crouchPosition = new Vector3(0f, 1.080f, 0.450f);
 
         if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {

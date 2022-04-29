@@ -1597,12 +1597,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControler: {fileID: 3703392478940904874}
+  staticMovementSpeed: 6
   velocity: 0
   acceleration: 1
-  playerLastPosition: {fileID: 0}
-  playerActualPosition: {fileID: 3703392478940904875}
-  playerOnSight: 0
-  playerStaticPosition: {x: 0, y: 0, z: 0}
   stepClips:
   - {fileID: 8300000, guid: 9b0a5f710859da6438bc6f60e8132230, type: 3}
   - {fileID: 8300000, guid: 201deb522ebde8d49bfe78557fb0fa91, type: 3}
@@ -1619,6 +1616,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 19783c3045d8f2d4ea7b7b7382f74259, type: 3}
   - {fileID: 8300000, guid: dae2d8ea9cd68ce4183e833e1a5b6b4c, type: 3}
   - {fileID: 8300000, guid: 6ab99ffc9be6cc341a04b0f21779a954, type: 3}
+  movementSound: 0
 --- !u!95 &3703392478940904872
 Animator:
   serializedVersion: 3

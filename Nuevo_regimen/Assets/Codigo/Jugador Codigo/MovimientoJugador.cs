@@ -6,19 +6,25 @@ public class MovimientoJugador : MonoBehaviour
 {
     [SerializeField] CharacterController characterControler;
 
-    float movementSpeed = 6f;
+    float movementSpeed;
+    [SerializeField] float staticMovementSpeed = 6f;
     Vector3 moveDirection;
 
-    private Animator anim;
-    [SerializeField] float velocity = 0.0f;
-    [SerializeField] float acceleration;
+    Animator anim;
+    float animationVelocity = 0.0f;
+    [SerializeField] float animationAcceleration = 1;
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
+
+    [HideInInspector] public short movementSound = 0;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        movementSpeed = staticMovementSpeed;
     }
 
     void Update()
@@ -39,23 +45,27 @@ public class MovimientoJugador : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
         {
-            movementSpeed = 12;
+            movementSpeed = staticMovementSpeed * 2;
             audioSource.volume = 0.9f;
+            movementSound = 3;
         }
         else if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
-            movementSpeed = 3;
+            movementSpeed = staticMovementSpeed / 2;
             audioSource.volume = 0.4f;
+            movementSound = 1;
         }
         else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
         {
-            movementSpeed = 4.5f;
+            movementSpeed = staticMovementSpeed / 1.3f;
             audioSource.volume = 0.5f;
+            movementSound = 2;
         }
         else
         {
-            movementSpeed = 6f;
+            movementSpeed = staticMovementSpeed;
             audioSource.volume = 0.6f;
+            movementSound = 0;
         }
     }
 
@@ -71,34 +81,34 @@ public class MovimientoJugador : MonoBehaviour
 
     private void PlayerAnimaton()
     {
-        if (moveDirection == Vector3.zero && velocity >= 0.0f && !Input.GetKey(KeyCode.LeftControl)
-            || moveDirection != Vector3.zero && velocity > 0.5f && !Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl)
-            || moveDirection != Vector3.zero && velocity > 0.5f && !Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftControl)
-            || moveDirection == Vector3.zero && velocity >= 0.0f && Input.GetKey(KeyCode.LeftControl))
+        if (moveDirection == Vector3.zero && animationVelocity >= 0.0f && !Input.GetKey(KeyCode.LeftControl)
+            || moveDirection != Vector3.zero && animationVelocity > 0.5f && !Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl)
+            || moveDirection != Vector3.zero && animationVelocity > 0.5f && !Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftControl)
+            || moveDirection == Vector3.zero && animationVelocity >= 0.0f && Input.GetKey(KeyCode.LeftControl))
         {
-            velocity -= Time.deltaTime * acceleration;
-            anim.SetFloat("Speed", velocity);
-            if (velocity <= 0.0f)
+            animationVelocity -= Time.deltaTime * animationAcceleration;
+            anim.SetFloat("Speed", animationVelocity);
+            if (animationVelocity <= 0.0f)
             {
-                velocity = 0.0f;
+                animationVelocity = 0.0f;
             }
         }
-        else if (moveDirection != Vector3.zero && velocity <= 0.5f && !Input.GetKey(KeyCode.LeftShift))
+        else if (moveDirection != Vector3.zero && animationVelocity <= 0.5f && !Input.GetKey(KeyCode.LeftShift))
         {
-            velocity += Time.deltaTime * acceleration;
-            anim.SetFloat("Speed", velocity);
-            if (velocity >= 0.5f)
+            animationVelocity += Time.deltaTime * animationAcceleration;
+            anim.SetFloat("Speed", animationVelocity);
+            if (animationVelocity >= 0.5f)
             {
-                velocity = 0.5f;
+                animationVelocity = 0.5f;
             }
         }
-        else if (moveDirection != Vector3.zero && velocity <= 1.0f && Input.GetKey(KeyCode.LeftShift))
+        else if (moveDirection != Vector3.zero && animationVelocity <= 1.0f && Input.GetKey(KeyCode.LeftShift))
         {
-            velocity += Time.deltaTime * acceleration;
-            anim.SetFloat("Speed", velocity);
-            if (velocity >= 1.0f)
+            animationVelocity += Time.deltaTime * animationAcceleration;
+            anim.SetFloat("Speed", animationVelocity);
+            if (animationVelocity >= 1.0f)
             {
-                velocity = 1.0f;
+                animationVelocity = 1.0f;
             }
         }
 
