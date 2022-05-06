@@ -1689,7 +1689,7 @@ NavMeshAgent:
   m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 720
-  m_StoppingDistance: 0.3
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1770,8 +1770,6 @@ MonoBehaviour:
   - {fileID: 5098585050962218611}
   - {fileID: 5343458947388223084}
   - {fileID: 1267446857585283697}
-  turnAroundIndex: 0
-  patrolTimer: 9
   acceleration: 1
   stepClips:
   - {fileID: 8300000, guid: 598fde9d4cf9c944eac2069ebb8a0072, type: 3}

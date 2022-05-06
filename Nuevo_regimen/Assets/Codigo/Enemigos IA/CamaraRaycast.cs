@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CamaraRaycast : MonoBehaviour
 {
-    RaycastHit raycastTest;
     [SerializeField] float distance;
-    Vector3 objectDirection;
+    [SerializeField] Vector3[] objectDirection;
+    [SerializeField] float[] anglesX;
+    [SerializeField] float[] anglesY;
+    [SerializeField] LayerMask layermask;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +23,16 @@ public class CamaraRaycast : MonoBehaviour
 
     private void Raycast()
     {
-        objectDirection = Quaternion.Euler(0, 0, 0) * transform.forward;
-        if (Physics.Raycast(gameObject.transform.position, objectDirection, distance))
+        objectDirection[0] = Quaternion.Euler(anglesX[0], anglesY[0], 0) * transform.forward;
+        objectDirection[1] = Quaternion.Euler(anglesX[1], anglesY[0], 0) * transform.forward;
+        objectDirection[2] = Quaternion.Euler(anglesX[2], anglesY[0], 0) * transform.forward;
+        objectDirection[3] = Quaternion.Euler(anglesX[0], anglesY[1], 0) * transform.forward;
+        objectDirection[4] = Quaternion.Euler(anglesX[0], anglesY[2], 0) * transform.forward;
+        if (Physics.Raycast(gameObject.transform.position, objectDirection[0], distance, layermask)
+            || Physics.Raycast(gameObject.transform.position, objectDirection[1], distance, layermask)
+            || Physics.Raycast(gameObject.transform.position, objectDirection[2], distance, layermask)
+            || Physics.Raycast(gameObject.transform.position, objectDirection[3], distance, layermask)
+            || Physics.Raycast(gameObject.transform.position, objectDirection[4], distance, layermask))
         {
             Debug.Log("Did Hit");
         }
@@ -35,7 +45,16 @@ public class CamaraRaycast : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Physics.Raycast(gameObject.transform.position, objectDirection, distance))
+        objectDirection[0] = Quaternion.Euler(anglesX[0], anglesY[0], 0) * transform.forward;
+        objectDirection[1] = Quaternion.Euler(anglesX[1], anglesY[0], 0) * transform.forward;
+        objectDirection[2] = Quaternion.Euler(anglesX[2], anglesY[0], 0) * transform.forward;
+        objectDirection[3] = Quaternion.Euler(anglesX[0], anglesY[1], 0) * transform.forward;
+        objectDirection[4] = Quaternion.Euler(anglesX[0], anglesY[2], 0) * transform.forward;
+        if (Physics.Raycast(gameObject.transform.position, objectDirection[0], distance, layermask)
+            || Physics.Raycast(gameObject.transform.position, objectDirection[1], distance, layermask)
+            || Physics.Raycast(gameObject.transform.position, objectDirection[2], distance, layermask)
+            || Physics.Raycast(gameObject.transform.position, objectDirection[3], distance, layermask)
+            || Physics.Raycast(gameObject.transform.position, objectDirection[4], distance, layermask))
         {
             Gizmos.color = Color.green;
         }
@@ -43,7 +62,10 @@ public class CamaraRaycast : MonoBehaviour
         {
             Gizmos.color = Color.red;
         }
-        objectDirection = transform.TransformDirection(Vector3.forward) * distance;
-        Gizmos.DrawRay(gameObject.transform.position, objectDirection);
+        Gizmos.DrawRay(gameObject.transform.position, objectDirection[0] * distance);
+        Gizmos.DrawRay(gameObject.transform.position, objectDirection[1] * distance);
+        Gizmos.DrawRay(gameObject.transform.position, objectDirection[2] * distance);
+        Gizmos.DrawRay(gameObject.transform.position, objectDirection[3] * distance);
+        Gizmos.DrawRay(gameObject.transform.position, objectDirection[4] * distance);
     }
 }

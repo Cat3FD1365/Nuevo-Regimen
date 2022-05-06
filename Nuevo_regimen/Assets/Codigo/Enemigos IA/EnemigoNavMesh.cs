@@ -23,7 +23,6 @@ public class EnemigoNavMesh : MonoBehaviour
     bool followPlayer = false;
     bool playerOnSight;
     Vector3 playerStaticPosition = new Vector3(0, 0, 0);
-    float folloPlayerTimer = 1.0f;
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
@@ -191,19 +190,10 @@ public class EnemigoNavMesh : MonoBehaviour
         if (playerOnSight == true)
         {
             playerStaticPosition = new Vector3(playerTarget.position.x, 0, playerTarget.position.z);
-            folloPlayerTimer = 1.0f;
         }
         else if (playerOnSight == false)
         {
-            folloPlayerTimer -= Time.deltaTime;
-            if (folloPlayerTimer > 0.0f)
-            {
-                playerStaticPosition = new Vector3(playerTarget.position.x, 0, playerTarget.position.z);
-            }
-            else if (folloPlayerTimer <= 0.0f)
-            {
-
-            }
+            playerStaticPosition = new Vector3(playerTarget.position.x, 0, playerTarget.position.z);
         }
     }
 
