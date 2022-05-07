@@ -21,7 +21,7 @@ public class EnemigoNavMesh : MonoBehaviour
     [SerializeField] private float animationAcceleration;
 
     bool followPlayer = false;
-    bool playerOnSight;
+    private bool playerOnSight;
     Vector3 playerStaticPosition = new Vector3(0, 0, 0);
     float followPlayerTimer;
     [SerializeField] float staticFollowPlayerTimer = 0.0f;
@@ -31,6 +31,10 @@ public class EnemigoNavMesh : MonoBehaviour
 
     MovimientoJugador movimientoJugador;
     EnemigoVisionV2 enemigoVisionV2;
+
+    CamaraRaycast[] camaraRaycast;
+    bool cameraDetection = false;
+    int cameraIteration = 0;
 
     void Start()
     {
@@ -42,6 +46,8 @@ public class EnemigoNavMesh : MonoBehaviour
 
         movimientoJugador = FindObjectOfType<MovimientoJugador>();
         enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
+
+        camaraRaycast = FindObjectsOfType<CamaraRaycast>();
     }
 
     void Update()
@@ -50,7 +56,7 @@ public class EnemigoNavMesh : MonoBehaviour
         LookAtReference();
         EnemyAnimaton();
         PlayerPositionReference();
-        FollowRange();
+        FollowVisionDistance();
     }
 
     private void PatrolDestination()
@@ -135,13 +141,15 @@ public class EnemigoNavMesh : MonoBehaviour
         }
     }
 
-    public void FollowPlayer()
+    private void FollowPlayer()
     {
         //EnemigoVisionV2 enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
         GameObject obj = enemigoVisionV2.colliders[0].gameObject;
         float followDistance = Vector3.Distance(playerTarget.position, transform.position);
 
-        if (enemigoVisionV2.IsInSight(obj) || movimientoJugador.movementSound == 3 && followDistance <= enemigoVisionV2.distance)
+        PlayerCameraDetection();
+
+        if (enemigoVisionV2.IsInSight(obj) || movimientoJugador.movementSound == 3 && followDistance <= enemigoVisionV2.distance || cameraDetection == true)
         {
             followPlayer = true;
             playerOnSight = true;
@@ -167,7 +175,7 @@ public class EnemigoNavMesh : MonoBehaviour
         }
     }
 
-    private void FollowRange()
+    private void FollowVisionDistance()
     {
         if (movimientoJugador.movementSound == 0)
         {
@@ -248,6 +256,21 @@ public class EnemigoNavMesh : MonoBehaviour
                 patrolTimer = 9f;
                 followPlayer = false;
             }
+        }
+    }
+
+    private void PlayerCameraDetection()
+    {
+        if (camaraRaycast[cameraIteration].playerOnCamera == true)
+        {
+            cameraDetection = true;
+        }
+        else
+        {
+            cameraDetection = false;
+            cameraIteration++;
+            if (cameraIteration == camaraRaycast.Length)
+                cameraIteration = 0;
         }
     }
 

@@ -9,7 +9,9 @@ public class CamaraRaycast : MonoBehaviour
     [SerializeField] float[] anglesX;
     [SerializeField] float[] anglesY;
     [SerializeField] LayerMask layermask;
-    // Start is called before the first frame update
+
+    [HideInInspector] public bool playerOnCamera = false;
+
     void Start()
     {
 
@@ -34,13 +36,12 @@ public class CamaraRaycast : MonoBehaviour
             || Physics.Raycast(gameObject.transform.position, objectDirection[3], distance, layermask)
             || Physics.Raycast(gameObject.transform.position, objectDirection[4], distance, layermask))
         {
-            Debug.Log("Did Hit");
+            playerOnCamera = true;
         }
         else
         {
-            Debug.Log("Did not Hit");
+            playerOnCamera = false;
         }
-
     }
 
     private void OnDrawGizmos()

@@ -1942,9 +1942,8 @@ MonoBehaviour:
   - {fileID: 0}
   playerTarget: {fileID: 1984089769}
   turnAround: []
-  turnAroundIndex: 0
-  patrolTimer: 9
-  acceleration: 0.5
+  animationAcceleration: 0
+  staticFollowPlayerTimer: 0
   stepClips: []
 --- !u!1 &286579580
 GameObject:
@@ -2687,6 +2686,101 @@ Transform:
   m_Father: {fileID: 1175510571}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &417984173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417984174}
+  - component: {fileID: 417984177}
+  - component: {fileID: 417984176}
+  - component: {fileID: 417984175}
+  m_Layer: 0
+  m_Name: Cube (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &417984174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417984173}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 55.08203, y: 0.94, z: -10.017293}
+  m_LocalScale: {x: 0.7899254, y: 17.115423, z: 11.784662}
+  m_Children: []
+  m_Father: {fileID: 503538931}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!65 &417984175
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417984173}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &417984176
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417984173}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &417984177
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417984173}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &419470021
 GameObject:
   m_ObjectHideFlags: 0
@@ -2880,6 +2974,7 @@ Transform:
   - {fileID: 197169615}
   - {fileID: 1333290681}
   - {fileID: 265266732}
+  - {fileID: 417984174}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4217,9 +4312,8 @@ MonoBehaviour:
   - {fileID: 0}
   playerTarget: {fileID: 0}
   turnAround: []
-  turnAroundIndex: 0
-  patrolTimer: 9
-  acceleration: 0.5
+  animationAcceleration: 0
+  staticFollowPlayerTimer: 0
   stepClips: []
 --- !u!95 &775251012
 Animator:
@@ -7663,7 +7757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264046565513620447, guid: a3ef71517e465a748966768881a41b9b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3ef71517e465a748966768881a41b9b, type: 3}
@@ -7928,7 +8022,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBody: {fileID: 1984089769}
   cameraPlayer: {fileID: 1660655189}
-  crouchCamera: 0
 --- !u!81 &1660655192
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8681,7 +8774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264046565513620447, guid: a3ef71517e465a748966768881a41b9b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3ef71517e465a748966768881a41b9b, type: 3}
@@ -9258,8 +9351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControler: {fileID: 1984089768}
-  velocity: 0
-  acceleration: 1
+  staticMovementSpeed: 6
+  animationAcceleration: 1
   stepClips:
   - {fileID: 8300000, guid: 9b0a5f710859da6438bc6f60e8132230, type: 3}
   - {fileID: 8300000, guid: 201deb522ebde8d49bfe78557fb0fa91, type: 3}
@@ -9276,6 +9369,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 19783c3045d8f2d4ea7b7b7382f74259, type: 3}
   - {fileID: 8300000, guid: dae2d8ea9cd68ce4183e833e1a5b6b4c, type: 3}
   - {fileID: 8300000, guid: 6ab99ffc9be6cc341a04b0f21779a954, type: 3}
+  movementSound: 0
 --- !u!82 &1984089773
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9601,6 +9695,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 11.18
+  objectDirection: []
+  anglesX: []
+  anglesY: []
+  layermask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &2008772411
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10275,9 +10375,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControler: {fileID: 21647120014435550}
-  velocity: 0
-  acceleration: 1
+  staticMovementSpeed: 6
+  animationAcceleration: 1
   stepClips: []
+  movementSound: 0
 --- !u!114 &21647120014435546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15116,7 +15217,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBody: {fileID: 794664729551224418}
   cameraPlayer: {fileID: 8534263512143533146}
-  crouchCamera: 0
 --- !u!4 &8534263512143533151
 Transform:
   m_ObjectHideFlags: 0
