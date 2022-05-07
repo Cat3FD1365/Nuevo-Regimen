@@ -48,24 +48,32 @@ public class MovimientoJugador : MonoBehaviour
             movementSpeed = staticMovementSpeed * 2;
             audioSource.volume = 0.9f;
             movementSound = 3;
+            characterControler.height = 1.95f;
+            characterControler.center = new Vector3(0, 1, 0);
         }
         else if (Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.LeftShift))
         {
             movementSpeed = staticMovementSpeed / 2;
             audioSource.volume = 0.4f;
             movementSound = 1;
+            characterControler.height = 0.95f;
+            characterControler.center = new Vector3(0, 0.5f, 0);
         }
         else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
         {
             movementSpeed = staticMovementSpeed / 1.3f;
             audioSource.volume = 0.5f;
             movementSound = 2;
+            characterControler.height = 0.95f;
+            characterControler.center = new Vector3(0, 0.5f, 0);
         }
         else
         {
             movementSpeed = staticMovementSpeed;
             audioSource.volume = 0.6f;
             movementSound = 0;
+            characterControler.height = 1.95f;
+            characterControler.center = new Vector3(0, 1, 0);
         }
     }
 
