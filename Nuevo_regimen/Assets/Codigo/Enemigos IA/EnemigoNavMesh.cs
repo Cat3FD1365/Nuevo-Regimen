@@ -67,7 +67,7 @@ public class EnemigoNavMesh : MonoBehaviour
 
     private void PatrolPointIteration()
     {
-        if (Vector3.Distance(transform.position, targetDestination) <= 1f)
+        if (Vector3.Distance(transform.position, targetDestination) <= 3f)
         {
             patrolTimer -= Time.deltaTime;
             if (patrolTimer <= 8 && patrolTimer >= 6)
@@ -220,7 +220,7 @@ public class EnemigoNavMesh : MonoBehaviour
     {
         targetDestination = playerStaticPosition;
         navEnemy.SetDestination(targetDestination);
-        if (Vector3.Distance(transform.position, targetDestination) <= 1f)
+        if (Vector3.Distance(transform.position, targetDestination) <= 3f)
         {
             patrolTimer -= Time.deltaTime;
             if (patrolTimer <= 8 && patrolTimer >= 6)
@@ -263,7 +263,12 @@ public class EnemigoNavMesh : MonoBehaviour
     {
         if (camaraRaycast[cameraIteration].playerOnCamera == true)
         {
-            cameraDetection = true;
+            int goToCamera;
+            goToCamera = Random.Range(0, 20);
+            if (goToCamera == 1)
+            {
+                cameraDetection = true;
+            }
         }
         else
         {
