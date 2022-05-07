@@ -18,11 +18,13 @@ public class EnemigoNavMesh : MonoBehaviour
 
     Animator anim;
     float velocity = 0.0f;
-    [SerializeField] private float acceleration;
+    [SerializeField] private float animationAcceleration;
 
     bool followPlayer = false;
     bool playerOnSight;
     Vector3 playerStaticPosition = new Vector3(0, 0, 0);
+    float followPlayerTimer;
+    [SerializeField] float staticFollowPlayerTimer = 0.0f;
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
@@ -114,13 +116,13 @@ public class EnemigoNavMesh : MonoBehaviour
         if (Vector3.Distance(transform.position, targetDestination) < 10 && velocity > 0.0f 
             || Vector3.Distance(transform.position, playerTarget.position) < 10 && velocity > 0.0f)
         {
-            velocity -= Time.deltaTime * acceleration;
+            velocity -= Time.deltaTime * animationAcceleration;
             anim.SetFloat("Speed", velocity);
         }
         else if (Vector3.Distance(transform.position, targetDestination) >= 10 && velocity < 1.0f
             || Vector3.Distance(transform.position, playerTarget.position) >= 10 && velocity < 1.0f)
         {
-            velocity += Time.deltaTime * acceleration;
+            velocity += Time.deltaTime * animationAcceleration;
             anim.SetFloat("Speed", velocity);
         }
         else if (velocity < 0.0f)
@@ -190,10 +192,19 @@ public class EnemigoNavMesh : MonoBehaviour
         if (playerOnSight == true)
         {
             playerStaticPosition = new Vector3(playerTarget.position.x, 0, playerTarget.position.z);
+            followPlayerTimer = staticFollowPlayerTimer;
         }
         else if (playerOnSight == false)
         {
-            playerStaticPosition = new Vector3(playerTarget.position.x, 0, playerTarget.position.z);
+            followPlayerTimer -= Time.deltaTime;
+            if (followPlayerTimer > 0.0f)
+            {
+                playerStaticPosition = new Vector3(playerTarget.position.x, 0, playerTarget.position.z);
+            }
+            else if (followPlayerTimer <= 0.0f)
+            {
+
+            }
         }
     }
 
