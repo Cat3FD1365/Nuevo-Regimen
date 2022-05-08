@@ -18,7 +18,7 @@ public class EnemigoNavMesh : MonoBehaviour
 
     Animator anim;
     float velocity = 0.0f;
-    [SerializeField] private float animationAcceleration;
+    [SerializeField] private float animationAcceleration = 1f;
 
     bool followPlayer = false;
     private bool playerOnSight;
