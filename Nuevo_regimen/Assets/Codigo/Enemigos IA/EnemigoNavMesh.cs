@@ -26,6 +26,10 @@ public class EnemigoNavMesh : MonoBehaviour
     float followPlayerTimer;
     [SerializeField] float staticFollowPlayerTimer = 0.0f;
 
+    [SerializeField] float attackRadius;
+    [SerializeField] float staticAttackCooldown;
+
+
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] stepClips;
 
@@ -143,11 +147,26 @@ public class EnemigoNavMesh : MonoBehaviour
 
     private void FollowPlayer()
     {
+        PlayerCameraDetection();
+
         //EnemigoVisionV2 enemigoVisionV2 = gameObject.GetComponent<EnemigoVisionV2>();
         GameObject obj = enemigoVisionV2.colliders[0].gameObject;
         float followDistance = Vector3.Distance(playerTarget.position, transform.position);
 
-        PlayerCameraDetection();
+        float attackCooldown = 0;
+        if (followDistance <= attackRadius && attackCooldown <= 0.0f)
+        {
+            anim.SetTrigger("Attack");
+            attackCooldown = staticAttackCooldown;
+        }
+        else if (attackCooldown > 0.0f)
+        {
+            attackCooldown -= Time.deltaTime;
+        }
+        else if (attackCooldown <= 0.0f)
+        {
+            attackCooldown = 0;
+        }
 
         if (enemigoVisionV2.IsInSight(obj) || movimientoJugador.movementSound == 3 && followDistance <= enemigoVisionV2.distance || cameraDetection == true)
         {
@@ -277,6 +296,12 @@ public class EnemigoNavMesh : MonoBehaviour
             if (cameraIteration == camaraRaycast.Length)
                 cameraIteration = 0;
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
 
     private void Step_Sound()
