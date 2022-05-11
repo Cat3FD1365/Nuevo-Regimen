@@ -168,7 +168,7 @@ public class EnemigoNavMesh : MonoBehaviour
             attackCooldown = 0;
         }
 
-        if (enemigoVisionV2.IsInSight(obj) || movimientoJugador.movementSound == 3 && followDistance <= enemigoVisionV2.distance || cameraDetection == true)
+        if (enemigoVisionV2.IsInSight(obj) || movimientoJugador.movementSound == 4 && followDistance <= enemigoVisionV2.distance || cameraDetection == true)
         {
             followPlayer = true;
             playerOnSight = true;
@@ -211,6 +211,10 @@ public class EnemigoNavMesh : MonoBehaviour
         else if (movimientoJugador.movementSound == 3)
         {
             enemigoVisionV2.distance = 50;
+        }
+        else if (movimientoJugador.movementSound == 4)
+        {
+            enemigoVisionV2.distance = 55;
         }
     }
 
@@ -283,7 +287,7 @@ public class EnemigoNavMesh : MonoBehaviour
         if (camaraRaycast[cameraIteration].playerOnCamera == true)
         {
             int goToCamera;
-            goToCamera = Random.Range(0, 20);
+            goToCamera = Random.Range(0, 25);
             if (goToCamera == 1)
             {
                 cameraDetection = true;

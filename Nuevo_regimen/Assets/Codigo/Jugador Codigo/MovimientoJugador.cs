@@ -14,10 +14,11 @@ public class MovimientoJugador : MonoBehaviour
     float animationVelocity = 0.0f;
     [SerializeField] float animationAcceleration = 1;
 
-    private AudioSource audioSource;
-    [SerializeField] private AudioClip[] stepClips;
+    AudioSource audioSource;
+    [SerializeField]  AudioClip[] stepClips;
 
     [HideInInspector] public short movementSound = 0;
+    [SerializeField] AudioClip[] whistleClips;
 
     void Start()
     {
@@ -74,6 +75,15 @@ public class MovimientoJugador : MonoBehaviour
             movementSound = 0;
             characterControler.height = 1.95f;
             characterControler.center = new Vector3(0, 1, 0);
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            movementSound = 4;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Whistle_Sound();
         }
     }
 
@@ -139,5 +149,16 @@ public class MovimientoJugador : MonoBehaviour
     private AudioClip StepClip()
     {
         return stepClips[UnityEngine.Random.Range(0, stepClips.Length)];
+    }
+
+    private void Whistle_Sound()
+    {
+        AudioClip clip = WhistleClip();
+        audioSource.PlayOneShot(clip);
+    }
+
+    private AudioClip WhistleClip()
+    {
+        return whistleClips[UnityEngine.Random.Range(0, whistleClips.Length)];
     }
 }

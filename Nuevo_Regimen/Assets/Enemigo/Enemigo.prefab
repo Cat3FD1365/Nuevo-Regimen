@@ -1771,7 +1771,7 @@ MonoBehaviour:
   - {fileID: 5343458947388223084}
   - {fileID: 1267446857585283697}
   animationAcceleration: 1
-  staticFollowPlayerTimer: 0
+  staticFollowPlayerTimer: 0.5
   attackRadius: 2.48
   staticAttackCooldown: 1
   stepClips:
