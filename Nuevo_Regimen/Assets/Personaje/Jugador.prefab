@@ -1614,6 +1614,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dae2d8ea9cd68ce4183e833e1a5b6b4c, type: 3}
   - {fileID: 8300000, guid: 6ab99ffc9be6cc341a04b0f21779a954, type: 3}
   movementSound: 0
+  whistleClips:
+  - {fileID: 8300000, guid: e076f7b70c8836b4ea73e7b6001d5f13, type: 3}
+  - {fileID: 8300000, guid: 01465d545ec0358429896e77682341b3, type: 3}
+  - {fileID: 8300000, guid: c3fc26ee4ec9f8f408b40f6ee9b977e6, type: 3}
+  - {fileID: 8300000, guid: 17e84fdde90302449b03a6d8fe7b4318, type: 3}
+  - {fileID: 8300000, guid: 9d43f2044d0745940b80249e838585bc, type: 3}
+  - {fileID: 8300000, guid: 59762e62220c3f347b8cc0bdd1ab39c9, type: 3}
+  - {fileID: 8300000, guid: 5e202dba76ec56a4b80706253e3ca562, type: 3}
 --- !u!95 &3703392478940904872
 Animator:
   serializedVersion: 3
