@@ -230,7 +230,6 @@ MonoBehaviour:
   - La velocidad no creo que me ayude
   - "Debo evitar que me vean las c\xE1maras"
   - "Si me ve ese guardia ser\xE1 dif\xEDcil perderlo"
-  - "Calladito me veo m\xE1s bonito"
   opa: 0
 --- !u!1 &409614598
 GameObject:
@@ -721,7 +720,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 800390654308388782, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
       propertyPath: m_Text
-      value: asdasd
+      value: Texto de prueba
       objectReference: {fileID: 0}
     - target: {fileID: 2274783567236362094, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
       propertyPath: m_AnchorMax.y
