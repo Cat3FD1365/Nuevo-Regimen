@@ -326,6 +326,10 @@ PrefabInstance:
       propertyPath: rellenoVida
       value: 
       objectReference: {fileID: 885363894}
+    - target: {fileID: 5891338071489565674, guid: 0e15522bf16266d4594f68d8c549f41f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6988813001092660054, guid: 0e15522bf16266d4594f68d8c549f41f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -828,6 +832,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2274783567236362094, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274783567597601553, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274783567597601553, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274783567597601553, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274783567899508187, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274783568736428775, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274783568736428775, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274783568736428775, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2274783568753017273, guid: 63a83608ec9a4ad429e74835650049c8, type: 3}
       propertyPath: m_Pivot.x
       value: 0
