@@ -171,9 +171,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2503305969199015892}
+  - component: {fileID: 2990473600744523976}
   m_Layer: 0
   m_Name: Security_Cam 1
-  m_TagString: Untagged
+  m_TagString: Camara
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,6 +197,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -41.838, z: 0}
+--- !u!135 &2990473600744523976
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023700031426837870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3981954563391016520
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,3 +517,4 @@ MonoBehaviour:
   layermask:
     serializedVersion: 2
     m_Bits: 64
+  playerOnCamera: 0

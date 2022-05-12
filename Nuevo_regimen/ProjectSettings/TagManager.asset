@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Player Fist
   - opciones
+  - Enemigo
+  - Camara
   layers:
   - Default
   - TransparentFX

@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class Notificaciones : MonoBehaviour
 {
     //Para logica del texto
+    [SerializeField] Image fondo;
     [SerializeField] Text mensaje;
     [SerializeField] string[] consejos;
     private float opa = 0;
     private bool alTope = true;
+
+    private bool finMensajesPredeterminados;
 
     //Para logica de correr
     private int corrio;
@@ -17,8 +20,10 @@ public class Notificaciones : MonoBehaviour
     private int random;
 
     //Para logica cercania a camaras y enemigos
-    private bool verGuardia;
-    private bool verCamara;
+    private int verGuardia;
+    private int guardia = 1;
+    private int verCamara;
+    private int camara = 1;
 
 
     //Sobre logica cambio de opacidad
@@ -50,6 +55,7 @@ public class Notificaciones : MonoBehaviour
     void Update()
     {
         //Actualizacion del color
+        fondo.color = new Color(fondo.color.r, fondo.color.g, fondo.color.b, opa * 0.8f);
         mensaje.color = new Color(mensaje.color.r, mensaje.color.g, mensaje.color.b, opa * 1f);
         subiendo();
         bajando();
@@ -58,8 +64,8 @@ public class Notificaciones : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             corrio = corr;
-            random = UnityEngine.Random.Range(0, 10);
-            if (corrio == 1 || random == corr)
+            random = UnityEngine.Random.Range(0, 8);
+            if ((corrio == 1 || random == corr) && finMensajesPredeterminados == true)
             {
                 corr = 2;
                 StartCoroutine(alCorrer());
@@ -67,15 +73,24 @@ public class Notificaciones : MonoBehaviour
         }
 
         //Primer encuentro con guardia y camara
-        if (verGuardia == true) StartCoroutine(encuentroGuardia());
-        if (verCamara == true) StartCoroutine(encuentroCamara());
+        if (verGuardia == guardia)
+        {
+            StartCoroutine(encuentroGuardia());
+            guardia = 2;
+        }
+        if (verCamara == camara)
+        {
+            StartCoroutine(encuentroCamara());
+            camara = 2;
+        }
+            
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemigo")) verGuardia = true;
+        if (other.CompareTag("Enemigo") && finMensajesPredeterminados == true) verGuardia = 1;
 
-        if (other.CompareTag("Camara")) verCamara = true;
+        if (other.CompareTag("Camara") && finMensajesPredeterminados == true) verCamara = 1;
             
     }
 
@@ -85,26 +100,23 @@ public class Notificaciones : MonoBehaviour
         yield return new WaitForSeconds(5);
         mensaje.text = consejos[0];
         alTope = false;
-        Debug.Log("Espera");
-        yield return new WaitForSeconds(7);
-        Debug.Log("Esperado");
+        yield return new WaitForSeconds(6);
         alTope = true;
 
-        yield return new WaitForSeconds(14);
+        yield return new WaitForSeconds(4);
         mensaje.text = consejos[1];
         alTope = false;
-        Debug.Log("Espera");
-        yield return new WaitForSeconds(7);
-        Debug.Log("Esperado");
+        yield return new WaitForSeconds(6);
         alTope = true;
-
+        yield return new WaitForSeconds(4);
+        finMensajesPredeterminados = true;
     }
 
     IEnumerator alCorrer()
     {
         mensaje.text = consejos[2];
         alTope = false;
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(6);
         alTope = true;
     }
 
@@ -112,7 +124,7 @@ public class Notificaciones : MonoBehaviour
     {
         mensaje.text = consejos[4];
         alTope = false;
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(6);
         alTope = true;
     }
 
@@ -120,7 +132,7 @@ public class Notificaciones : MonoBehaviour
     {
         mensaje.text = consejos[3];
         alTope = false;
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(6);
         alTope = true;
     }
 }
